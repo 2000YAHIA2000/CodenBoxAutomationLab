@@ -105,7 +105,7 @@ public class MainCodenBoxAutomationLab {
 		driver.switchTo().alert().accept();
 	}
 
-	@Test(priority = 8,enabled = false)
+	@Test(priority = 8, enabled = false)
 	public void getDataFromTable() {
 		WebElement table = driver.findElement(By.id("product"));
 		List<WebElement> tableelements = table.findElements(By.tagName("td"));
@@ -114,49 +114,65 @@ public class MainCodenBoxAutomationLab {
 			System.out.println(tableelements.get(i).getText());
 		}
 	}
-	@Test(priority = 9,enabled = false)
+
+	@Test(priority = 9, enabled = false)
 	public void isDisplayed() {
-		boolean x=rand.nextBoolean();
-		WebElement showbutton=driver.findElement(By.id("show-textbox"));
-		WebElement headbutton=driver.findElement(By.id("hide-textbox"));
+		boolean x = rand.nextBoolean();
+		WebElement showbutton = driver.findElement(By.id("show-textbox"));
+		WebElement headbutton = driver.findElement(By.id("hide-textbox"));
 		boolean expected;
-		if(x) {
+		if (x) {
 			headbutton.click();
-			expected=false;
-		}else {
+			expected = false;
+		} else {
 			showbutton.click();
-			expected=true;
+			expected = true;
 		}
-		WebElement serachbutton=driver.findElement(By.id("displayed-text"));
-		boolean actual= serachbutton.isDisplayed();
-		//System.out.println(actual+"      "+expected);
+		WebElement serachbutton = driver.findElement(By.id("displayed-text"));
+		boolean actual = serachbutton.isDisplayed();
+		// System.out.println(actual+" "+expected);
 		Assert.assertEquals(actual, expected);
-		
+
 	}
-	@Test(priority = 10,enabled = false)
+
+	@Test(priority = 10, enabled = false)
 	public void isEnabled() {
-		boolean x=rand.nextBoolean();
-		WebElement enablebutton=driver.findElement(By.id("enabled-button"));
-		WebElement hidebutton=driver.findElement(By.id("hide-textbox"));
+		boolean x = rand.nextBoolean();
+		WebElement enablebutton = driver.findElement(By.id("enabled-button"));
+		WebElement hidebutton = driver.findElement(By.id("hide-textbox"));
 		boolean expected;
-		if(x) {
+		if (x) {
 			hidebutton.click();
-			expected=false;
-		}else {
+			expected = false;
+		} else {
 			enablebutton.click();
-			expected=true;
+			expected = true;
 		}
-		WebElement serachbutton=driver.findElement(By.id("displayed-text"));
-		boolean actual= serachbutton.isEnabled();
-		//System.out.println(actual+"      "+expected);
+		WebElement serachbutton = driver.findElement(By.id("displayed-text"));
+		boolean actual = serachbutton.isEnabled();
+		// System.out.println(actual+" "+expected);
 		Assert.assertEquals(actual, expected);
-		
+
 	}
+
 	@Test(priority = 11)
-	public void mouseHover(){
-		JavascriptExecutor js=(JavascriptExecutor) driver;
+	public void mouseHover() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(0,1750)");
-		
+
 	}
+
+	@Test(priority = 12)
+	public void calendr() throws InterruptedException {
+	WebElement openCaulender=driver.findElement(By.linkText("Booking Calendar"));
+	openCaulender.click();
+	List<String> windowHandlesList = new ArrayList<>(driver.getWindowHandles());
+	driver.switchTo().window(windowHandlesList.get(1));
+	Thread.sleep(3000);
+	List<WebElement> list=driver.findElements(By.xpath("//a[@href='javascript:void(0)']"));
+	System.out.println(list.size());
 	
+	
+	
+	}
 }
